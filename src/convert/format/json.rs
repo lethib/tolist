@@ -1,6 +1,6 @@
 use crate::convert::format::Format;
 
-pub(super) const JSON: Format = Format {
+pub(crate) const JSON: Format = Format {
     name: "json",
     open: "[",
     close: "]",
