@@ -6,11 +6,15 @@ use crate::{
 };
 
 pub mod cli_error;
+pub mod clipboard;
 pub mod convert;
 
 fn main() -> ExitCode {
     match run() {
-        Ok(()) => ExitCode::SUCCESS,
+        Ok(output) => {
+            eprintln!("{}", preview(&output, 50));
+            ExitCode::SUCCESS
+        }
         Err(err) => {
             eprintln!("{err}");
             ExitCode::FAILURE
@@ -18,10 +22,14 @@ fn main() -> ExitCode {
     }
 }
 
-fn run() -> Result<(), CLIError> {
+fn run() -> Result<String, CLIError> {
     let options = parse_args(env::args().skip(1))?; // first arg is the binary path
-    dbg!(options);
-    Ok(())
+
+    let input = clipboard::read();
+    let output = convert::convert(input, options)?;
+
+    clipboard::write(&output);
+    Ok(output)
 }
 
 fn parse_args(mut args: impl Iterator<Item = String>) -> Result<Options, CLIError> {
@@ -39,4 +47,11 @@ fn parse_args(mut args: impl Iterator<Item = String>) -> Result<Options, CLIErro
     }
 
     Ok(options)
+}
+
+fn preview(text: &str, max: usize) -> String {
+    match text.char_indices().nth(max) {
+        Some((byte_index, _)) => format!("{}…", &text[..byte_index]),
+        None => text.to_string(),
+    }
 }
