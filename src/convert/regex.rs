@@ -1,4 +1,4 @@
-use regex::Regex;
+use regex_lite::Regex;
 use std::sync::LazyLock;
 
 pub(super) static PLAIN_NUMBER: LazyLock<Regex> =
