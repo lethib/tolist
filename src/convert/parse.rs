@@ -74,7 +74,7 @@ fn classify(cell: &str) -> Field {
 }
 
 fn drop_header(fields: Vec<Field>) -> Vec<Field> {
-    if fields.len() == 0 {
+    if fields.is_empty() {
         return fields;
     }
 
