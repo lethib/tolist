@@ -62,7 +62,7 @@ tolist [flags]
 
 The point of the tool is to run on a keyboard shortcut. Some tools can properly run scripts using keyboard shortcuts.
 
-#### Raycast
+#### [Raycast](./raycast)
 
 `raycast/` holds a thin script-command wrapper and its own [README](raycast/README.md) with the setup
 steps.
