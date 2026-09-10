@@ -54,10 +54,10 @@ fn run() -> Result<(), CLIError> {
         Command::Help => print!("{USAGE}"),
         Command::Version => println!("tolist {}", env!("CARGO_PKG_VERSION")),
         Command::Run(options) => {
-            let input = clipboard::read();
+            let input = clipboard::read()?;
             let output = convert::convert(input, options)?;
 
-            clipboard::write(&output);
+            clipboard::write(&output)?;
             eprintln!("{}", preview(&output, 50));
         }
     }
