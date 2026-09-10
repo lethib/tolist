@@ -9,12 +9,39 @@ pub mod cli_error;
 pub mod clipboard;
 pub mod convert;
 
+const USAGE: &str = "\
+tolist turns a copied spreadsheet column into a list literal.
+
+Usage:
+  tolist [flags]
+
+Reads the clipboard, converts it, and writes the result back to the clipboard.
+
+Flags:
+  -f, --format <name>  target format: json, sql, python, csv (default: json)
+      --keep-header    treat the first line as a value, never as a column name
+  -h, --help           print this help and exit
+  -V, --version        print the version and exit
+
+Format aliases:
+  json    js, javascript, go
+  python  py
+
+Examples:
+  tolist                # clipboard to clipboard, as JSON
+  tolist -f sql         # (47658,35367)
+  tolist --keep-header  # keep the first line as a value
+";
+
+enum Command {
+    Run(Options),
+    Help,
+    Version,
+}
+
 fn main() -> ExitCode {
     match run() {
-        Ok(output) => {
-            eprintln!("{}", preview(&output, 50));
-            ExitCode::SUCCESS
-        }
+        Ok(()) => ExitCode::SUCCESS,
         Err(err) => {
             eprintln!("{err}");
             ExitCode::FAILURE
@@ -22,21 +49,29 @@ fn main() -> ExitCode {
     }
 }
 
-fn run() -> Result<String, CLIError> {
-    let options = parse_args(env::args().skip(1))?; // first arg is the binary path
+fn run() -> Result<(), CLIError> {
+    match parse_args(env::args().skip(1))? {
+        Command::Help => print!("{USAGE}"),
+        Command::Version => println!("tolist {}", env!("CARGO_PKG_VERSION")),
+        Command::Run(options) => {
+            let input = clipboard::read();
+            let output = convert::convert(input, options)?;
 
-    let input = clipboard::read();
-    let output = convert::convert(input, options)?;
+            clipboard::write(&output);
+            eprintln!("{}", preview(&output, 50));
+        }
+    }
 
-    clipboard::write(&output);
-    Ok(output)
+    Ok(())
 }
 
-fn parse_args(mut args: impl Iterator<Item = String>) -> Result<Options, CLIError> {
+fn parse_args(mut args: impl Iterator<Item = String>) -> Result<Command, CLIError> {
     let mut options = Options::default();
 
     while let Some(arg) = args.next() {
         match arg.as_str() {
+            "--help" | "-h" => return Ok(Command::Help),
+            "--version" | "-V" => return Ok(Command::Version),
             "--keep-header" => options.keep_header = true,
             "--format" | "-f" => {
                 let targeted_format = args.next().ok_or(CLIError::MissingValue("--format"))?;
@@ -46,7 +81,7 @@ fn parse_args(mut args: impl Iterator<Item = String>) -> Result<Options, CLIErro
         }
     }
 
-    Ok(options)
+    Ok(Command::Run(options))
 }
 
 fn preview(text: &str, max: usize) -> String {
