@@ -2,6 +2,9 @@
 name = "tolist"
 version = "0.1.0"
 edition = "2024"
+description = "Turn a copied spreadsheet column into a list"
+license = "MIT"
+repository = "https://github.com/lethib/tolist"
 
 [dependencies]
 arboard = { version = "3.6.1", default-features = false }
