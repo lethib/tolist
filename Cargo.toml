@@ -6,3 +6,10 @@ edition = "2024"
 [dependencies]
 arboard = { version = "3.6.1", default-features = false }
 regex-lite = "0.1.9"
+
+[profile.release]
+strip = true
+panic = "abort"
+lto = true
+codegen-units = 1
+opt-level = "z"
