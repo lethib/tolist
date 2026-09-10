@@ -44,6 +44,7 @@ pick a format from the dropdown:
 | JSON (default) | `[47658,35367]` |
 | SQL | `(47658,35367)` |
 | Python | `[47658, 35367]` |
+| Ruby | `[47658, 35367]` |
 | CSV | `47658,35367` |
 
 Values are written bare when the whole column is numeric. As soon as one value

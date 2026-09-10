@@ -53,7 +53,7 @@ tolist [flags]
 
 | Flag | Meaning |
 | --- | --- |
-| `-f`, `--format <name>` | target format: `json`, `sql`, `python`, `csv` (default `json`) |
+| `-f`, `--format <name>` | target format: `json`, `sql`, `python`, `ruby`, `csv` (default `json`) |
 | `--keep-header` | treat the first line as a value, never as a column name |
 | `-h`, `--help` | print help and exit |
 | `-V`, `--version` | print the version and exit |
@@ -78,6 +78,7 @@ For the column `47,658` / `35,367`:
 | `json` | `[47658,35367]` |
 | `sql` | `(47658,35367)` |
 | `python` | `[47658, 35367]` |
+| `ruby` | `[47658, 35367]` |
 | `csv` | `47658,35367` |
 
 Values are written bare when every value in the column is a number. As soon as

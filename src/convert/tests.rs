@@ -106,6 +106,13 @@ fn convert_renders_a_column_as_a_list_literal() {
             r"['a\'b', 'c\\d']",
         )
         .format("python"),
+        Case::new("ruby uses a spaced separator", "10\n20", "[10, 20]").format("ruby"),
+        Case::new(
+            "ruby escapes quotes and backslashes",
+            "a'b\nc\\d",
+            r"['a\'b', 'c\\d']",
+        )
+        .format("ruby"),
         Case::new(
             "json escapes quotes and backslashes",
             "a\"b\nc\\d",
@@ -187,8 +194,8 @@ fn format_parse_resolves_every_name_and_alias() {
 
 #[test]
 fn format_parse_rejects_an_unknown_name() {
-    match Format::parse("ruby") {
-        Err(ConvertError::UnknownFormat(name)) => assert_eq!(name, "ruby"),
-        other => panic!("Format::parse(\"ruby\") = {other:?}, want UnknownFormat"),
+    match Format::parse("ekljee") {
+        Err(ConvertError::UnknownFormat(name)) => assert_eq!(name, "ekljee"),
+        other => panic!("Format::parse(\"ekljee\") = {other:?}, want UnknownFormat"),
     }
 }

@@ -18,7 +18,7 @@ Usage:
 Reads the clipboard, converts it, and writes the result back to the clipboard.
 
 Flags:
-  -f, --format <name>  target format: json, sql, python, csv (default: json)
+  -f, --format <name>  target format: json, sql, python, ruby, csv (default: json)
       --keep-header    treat the first line as a value, never as a column name
   -h, --help           print this help and exit
   -V, --version        print the version and exit

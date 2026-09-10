@@ -1,11 +1,12 @@
 use crate::convert::{
     ConvertError, Field,
-    format::{csv::CSV, json::JSON, python::PYTHON, sql::SQL},
+    format::{csv::CSV, json::JSON, python::PYTHON, ruby::RUBY, sql::SQL},
 };
 
 pub mod csv;
 pub mod json;
 pub mod python;
+pub mod ruby;
 pub mod sql;
 
 #[derive(Debug)]
@@ -23,6 +24,7 @@ impl Format {
             "json" | "js" | "javascript" | "go" => Ok(JSON),
             "sql" => Ok(SQL),
             "python" | "py" => Ok(PYTHON),
+            "ruby" => Ok(RUBY),
             "csv" => Ok(CSV),
             _ => Err(ConvertError::UnknownFormat(name.to_string())),
         }

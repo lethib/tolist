@@ -20,7 +20,7 @@
 # @raycast.icon 🔢
 # @raycast.author lethib
 # @raycast.authorURL https://github.com/lethib
-# @raycast.argument1 { "type": "dropdown", "placeholder": "Format", "optional": true, "data": [{ "title": "JSON", "value": "json" }, { "title": "SQL", "value": "sql" }, { "title": "Python", "value": "python" }, { "title": "CSV", "value": "csv" }] }
+# @raycast.argument1 { "type": "dropdown", "placeholder": "Format", "optional": true, "data": [{ "title": "JSON", "value": "json" }, { "title": "SQL", "value": "sql" }, { "title": "Python", "value": "python" }, { "title": "Ruby", "value": "ruby" }. { "title": "CSV", "value": "csv" }] }
 # @raycast.description Convert the copied spreadsheet column into a list literal
 
 for candidate in \
