@@ -2,18 +2,22 @@
 
 ### Install
 
-If not already installed, please refer to the [installation](../README.md#from-a-release) step.
+If not already installed, please refer to the [installation](../README.md#from-a-release-no-rust-needed) step.
 
 You do **not** need Rust, or anything else installed.
 
 ### Add the script to Raycast
 
-1. Download this repository, or just this `raycast/` folder, somewhere
-   permanent — Raycast reads the script from wherever you put it, so a folder
-   you might delete later is a bad choice.
+1. Open Terminal and run:
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/lethib/tolist/main/raycast/install.sh | sh
+   ```
+   This downloads the two files the script needs into
+   `~/.local/share/tolist/` and prints where they landed.
 2. Open Raycast, then **Settings → Extensions → Script Commands →
    Add Script Directory**.
-3. Pick the `raycast/` folder.
+3. Pick the `raycast` folder the installer printed
+   (`~/.local/share/tolist/raycast` by default).
 
 *Clipboard to List* now shows up when you search in Raycast.
 
