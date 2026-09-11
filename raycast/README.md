@@ -12,12 +12,12 @@ You do **not** need Rust, or anything else installed.
    ```sh
    curl -fsSL https://raw.githubusercontent.com/lethib/tolist/main/raycast/install.sh | sh
    ```
-   This downloads the two files the script needs into
-   `~/.local/share/tolist/` and prints where they landed.
+   This downloads the two files the script needs into `~/.local/share/tolist/` and adds a `tolist`
+   shortcut right in your home folder.
 2. Open Raycast, then **Settings → Extensions → Script Commands →
    Add Script Directory**.
-3. Pick the `raycast` folder the installer printed
-   (`~/.local/share/tolist/raycast` by default).
+3. In the folder picker, go to your home folder, open **tolist**, then
+   **raycast**.
 
 *Clipboard to List* now shows up when you search in Raycast.
 
